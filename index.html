@@ -63,110 +63,39 @@
 
     body {
       margin: 0;
-      padding: 20px 0 0 0;
+      padding: 0;
       font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       background: #f5f2ed;
     }
 
-    .hero-section {
-      position: relative;
-      min-height: 320px;
+    .layout {
+      display: flex;
+      min-height: 100vh;
+      gap: 16rem;
+    }
+
+    .layout-left {
+      width: 36%;
+      max-width: 420px;
+      min-width: 280px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 2.5rem 2rem 2.5rem 2.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1.5rem;
+    }
+
+    .hero-section {
+      position: relative;
+      width: 100%;
+      text-align: left;
     }
 
     .hero {
       position: relative;
       z-index: 1;
-      text-align: center;
-      padding: 2rem 0;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .hero-floating-images {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .hero-floating-images .floating-card {
-      position: absolute;
-      pointer-events: auto;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: none;
-      background: transparent;
-      transition: opacity 0.6s ease;
-    }
-
-    .hero-floating-images .floating-card-star {
-      width: 88px;
-      height: 88px;
-      right: 28%;
-      top: 42%;
-      transform: translateY(-50%) rotate(12deg);
-      box-shadow: none;
-      background: transparent;
-      z-index: 1;
-    }
-
-    .hero-floating-images .floating-card-star img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .hero-floating-images .floating-card-star:hover {
-      opacity: 0.5;
-    }
-
-    .hero-floating-images .floating-card-star2 {
-      width: 88px;
-      height: 88px;
-      left: 28%;
-      top: 44%;
-      transform: translateY(-50%) rotate(-8deg);
-      box-shadow: none;
-      background: transparent;
-      z-index: 1;
-    }
-
-    .hero-floating-images .floating-card-star2 img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .hero-floating-images .floating-card-star2:hover {
-      opacity: 0.5;
-    }
-
-    .hero-floating-images .floating-card-star2-right {
-      width: 44px;
-      height: 44px;
-      right: 31.5%;
-      top: 32%;
-      transform: translateY(-50%) rotate(6deg);
-      box-shadow: none;
-      background: transparent;
-      z-index: 1;
-    }
-
-    .hero-floating-images .floating-card-star2-right img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .hero-floating-images .floating-card-star2-right:hover {
-      opacity: 0.5;
     }
 
     .hero-tag {
@@ -179,19 +108,27 @@
       margin: 0 0 0.75rem 0;
     }
 
+    .hero-profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 0 1.25rem 0;
+    }
+
     .hero-title {
       font-family: "PP Neue World", Georgia, serif;
-      font-size: clamp(2.75rem, 9vw, 6rem);
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
       font-weight: 400;
       color: #000;
       margin: 0 0 1rem 0;
-      line-height: 1.25;
-      white-space: nowrap;
+      line-height: 1.2;
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 900px) {
       .hero-title {
-        font-size: clamp(2rem, 11vw, 2.75rem);
+        font-size: clamp(2rem, 6vw, 2.75rem);
       }
     }
 
@@ -211,7 +148,7 @@
       margin-top: 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 1.25rem;
       flex-wrap: wrap;
     }
@@ -264,88 +201,16 @@
       fill: currentColor;
     }
 
-    .gallery-wrapper {
-      overflow: hidden;
-      max-width: 1500px;
-      margin: 0 auto;
-      padding: 1rem 1rem 2rem;
-    }
-
-    .gallery-track {
-      display: flex;
-      gap: 20px;
-      width: max-content;
-      animation: scroll 45s linear infinite;
-    }
-
-    .gallery-track:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .gallery {
-      display: flex;
-      flex-shrink: 0;
-      gap: 20px;
-    }
-
-    .gallery-item {
-      flex-shrink: 0;
-      width: 280px;
-      margin: 0;
-      overflow: hidden;
-      border-radius: 8px;
-      background: #f5f2ed;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .gallery-item:hover {
-      opacity: 0.92;
-    }
-
-    .gallery-item img {
-      width: 280px;
-      height: 280px;
-      min-width: 280px;
-      min-height: 280px;
-      aspect-ratio: 1;
-      object-fit: cover;
-      display: block;
-    }
-
-    .gallery-item-caption {
-      padding: 0.5rem 0.25rem 0;
-      background: #f5f2ed;
-    }
-
-    .gallery-item-title {
-      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      font-weight: 600;
-      font-size: 1.15rem;
-      margin: 0 0 0.15rem 0;
-      background: #f5f2ed;
-    }
-
-    .gallery-item-subtitle {
-      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 1rem;
-      color: #666;
-      margin: 0;
-      background: #f5f2ed;
+    .layout-right {
+      flex: 1;
+      padding: 2.5rem 2.5rem 4rem 2rem;
+      overflow-y: auto;
+      min-width: 0;
     }
 
     .projects-section {
-      padding: 4rem 1.5rem 6rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      padding: 3rem 0 4rem;
+      max-width: 900px;
     }
 
     .project-panel {
@@ -353,8 +218,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: center;
-      min-height: 70vh;
-      padding: 3rem 0;
+      min-height: 50vh;
+      padding: 5rem 0;
       opacity: 0;
       transform: translateY(60px);
       transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -412,23 +277,78 @@
 
     .project-panel-title {
       font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-size: clamp(1.35rem, 2.25vw, 1.65rem);
       font-weight: 600;
       color: #222;
-      margin: 0 0 1rem 0;
+      margin: 0 0 0.35rem 0;
       line-height: 1.2;
+    }
+
+    .project-panel-subtitle {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #666;
+      margin: 0 0 1rem 0;
+      line-height: 1.4;
     }
 
     .project-panel-description {
       font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 1.05rem;
       color: #444;
       line-height: 1.65;
       margin: 0;
     }
 
+    .project-panel-description ul {
+      margin: 0;
+      padding-left: 1.35rem;
+      list-style: disc;
+    }
+
+    .project-panel-description li {
+      margin-bottom: 0.5rem;
+    }
+
+    .project-panel-description li:last-child {
+      margin-bottom: 0;
+    }
+
     @media (max-width: 768px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .layout-left {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        height: auto;
+        position: relative;
+        padding: 2rem 1.5rem;
+      }
+
+      .hero-section {
+        text-align: center;
+      }
+
+      .hero-profile-pic {
+        margin-left: auto;
+        margin-right: auto;
+        width: 120px;
+        height: 120px;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .layout-right {
+        padding: 1.5rem 1.5rem 3rem;
+      }
+
       .project-panel {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -451,142 +371,51 @@
   </style>
 </head>
 <body>
-  <section class="hero-section">
-    <div class="hero">
-      <p class="hero-tag">Welcome to my portfolio!</p>
-      <h1 class="hero-title">SAMANTHA CHANG</h1>
-      <p class="hero-subtitle">Incoming SWE Intern @ Apple.</p>
-      <p class="hero-subtitle">Caltech, Computer Science + Control Systems + Robotics. </p>
-      <p class="hero-subtitle">ArtCenter College of Design, Interaction Design (dual-enrolled).</p>
-      <div class="hero-actions">
-        <a href="documents/Samantha Chang - Resume - Boston Dynamics.pdf" class="btn-resume" target="_blank" rel="noopener">Resumé</a>
-        <div class="hero-icon-links">
-          <a href="https://www.linkedin.com/in/samantha-chang8/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="https://github.com/samanthac02" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          </a>
-          <a href="mailto:schang8@caltech.edu" aria-label="Email" title="Email">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          </a>
+  <div class="layout">
+    <aside class="layout-left">
+      <section class="hero-section">
+        <div class="hero">
+          <p class="hero-tag">Welcome to my portfolio!</p>
+          <img src="images/profile-pic.jpeg" alt="Samantha Chang" class="hero-profile-pic">
+          <h1 class="hero-title">SAMANTHA CHANG</h1>
+          <p class="hero-subtitle">Incoming SWE Intern @ Apple.</p>
+          <p class="hero-subtitle">Caltech, Computer Science + Control Systems + Robotics.</p>
+          <p class="hero-subtitle">ArtCenter College of Design, Interaction Design (dual-enrolled).</p>
+          <div class="hero-actions">
+            <a href="documents/Samantha Chang - Resume - Boston Dynamics.pdf" class="btn-resume" target="_blank" rel="noopener">Resumé</a>
+            <div class="hero-icon-links">
+              <a href="https://www.linkedin.com/in/samantha-chang8/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="https://github.com/samanthac02" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </a>
+              <a href="mailto:schang8@caltech.edu" aria-label="Email" title="Email">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="hero-floating-images" aria-hidden="true">
-      <div class="floating-card floating-card-star2">
-        <img src="images/star2.png" alt="">
-      </div>
-      <div class="floating-card floating-card-star">
-        <img src="images/star.png" alt="">
-      </div>
-      <div class="floating-card floating-card-star2-right">
-        <img src="images/star2.png" alt="">
-      </div>
-    </div>
-  </section>
+      </section>
+    </aside>
 
-  <div class="gallery-wrapper">
-    <div class="gallery-track">
-      <div class="gallery">
-        <a href="#project-1" class="gallery-item">
-          <img src="images/project1-small.png" alt="Humanoid Robotics Research">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Assistive Robotic Walker</p>
-            <p class="gallery-item-subtitle">Lemelson-MIT InvenTeam · CAD, manufacturing, EurekaFest</p>
-          </div>
-        </a>
-        <a href="#project-2" class="gallery-item">
-          <img src="images/project2-small.png" alt="FIRST Robotics">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">FIRST Robotics Competition</p>
-            <p class="gallery-item-subtitle">Captain & Programming Lead · Autonomous & vision</p>
-          </div>
-        </a>
-        <a href="#project-3" class="gallery-item">
-          <img src="images/project3-small.png" alt="Drowning Detection">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Drowning Detection Assistant</p>
-            <p class="gallery-item-subtitle">Lemelson-MIT InvenTeam · Sensors, Bluetooth, $7,500 grant</p>
-          </div>
-        </a>
-        <a href="#project-4" class="gallery-item">
-          <img src="images/project4-small.png" alt="VEX AI Robotics">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">VEX AI Robotics Competition</p>
-            <p class="gallery-item-subtitle">Programming Lead · PyTorch, Jetson, Top 6 Worlds</p>
-          </div>
-        </a>
-        <a href="#project-5" class="gallery-item">
-          <img src="images/project5-small.png" alt="Electronic Face Mask">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Electronic Face Mask</p>
-            <p class="gallery-item-subtitle">Wearable electronics · Interactive display</p>
-          </div>
-        </a>
-        <a href="#project-6" class="gallery-item">
-          <img src="images/project6-small.png" alt="Bipedal Robot">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Bipedal Robot</p>
-            <p class="gallery-item-subtitle">Caltech · Control systems for humanoid robots</p>
-          </div>
-        </a>
-      </div>
-      <div class="gallery" aria-hidden="true">
-        <a href="#project-1" class="gallery-item">
-          <img src="images/project1-small.png" alt="">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Assistive Robotic Walker</p>
-            <p class="gallery-item-subtitle">Lemelson-MIT InvenTeam · CAD, manufacturing, EurekaFest</p>
-          </div>
-        </a>
-        <a href="#project-2" class="gallery-item">
-          <img src="images/project2-small.png" alt="">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">FIRST Robotics Competition</p>
-            <p class="gallery-item-subtitle">Captain & Programming Lead · Autonomous & vision</p>
-          </div>
-        </a>
-        <a href="#project-3" class="gallery-item">
-          <img src="images/project3-small.png" alt="">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Drowning Detection Assistant</p>
-            <p class="gallery-item-subtitle">Lemelson-MIT InvenTeam · Sensors, Bluetooth, $7,500 grant</p>
-          </div>
-        </a>
-        <a href="#project-4" class="gallery-item">
-          <img src="images/project4-small.png" alt="">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">VEX AI Robotics Competition</p>
-            <p class="gallery-item-subtitle">Programming Lead · PyTorch, Jetson, Top 6 Worlds</p>
-          </div>
-        </a>
-        <a href="#project-5" class="gallery-item">
-          <img src="images/project5-small.png" alt="">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Electronic Face Mask</p>
-            <p class="gallery-item-subtitle">Wearable electronics · Interactive display</p>
-          </div>
-        </a>
-        <a href="#project-6" class="gallery-item">
-          <img src="images/project6-small.png" alt="">
-          <div class="gallery-item-caption">
-            <p class="gallery-item-title">Bipedal Robot</p>
-            <p class="gallery-item-subtitle">Caltech · Control systems for humanoid robots</p>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <section class="projects-section" aria-label="Projects">
+    <main class="layout-right">
+  <section class="projects-section" aria-label="Project details">
     <article class="project-panel" id="project-1">
       <div class="project-panel-image">
         <img src="images/project1-big.png" alt="Assistive Robotic Walker">
       </div>
       <div class="project-panel-content">
-        <h2 class="project-panel-title">Lemelson-MIT InvenTeam — Assistive Robotic Walker</h2>
-        <p class="project-panel-description">Project Lead for a team of 15 students. Led technical documentation and team communication. Integrated ultra-wideband, LiDAR, infrared, and Bluetooth sensors with an A* navigation algorithm in C++. Assembled the electrical system, assisted in design with CAD, and manufactured parts from our in-house machine shop. Secured $7,500 funding from MIT and presented at EurekaFest.</p>
+        <h2 class="project-panel-title">Assistive Robotic Walker</h2>
+        <p class="project-panel-subtitle">Lemelson-MIT InvenTeam · Assistive mobility</p>
+        <div class="project-panel-description">
+          <ul>
+            <li>Project Lead for a team of 15 students; led technical documentation and team communication.</li>
+            <li>Integrated ultra-wideband, LiDAR, infrared, and Bluetooth sensors with an A* navigation algorithm in C++.</li>
+            <li>Assembled the electrical system, assisted in design with CAD, and manufactured parts from our in-house machine shop.</li>
+            <li>Secured $7,500 funding from MIT and presented at EurekaFest.</li>
+          </ul>
+        </div>
       </div>
     </article>
     <article class="project-panel" id="project-2">
@@ -595,7 +424,14 @@
       </div>
       <div class="project-panel-content">
         <h2 class="project-panel-title">FIRST Robotics Competition</h2>
-        <p class="project-panel-description">Captain and Programming Lead for a 100+ person team. Led the Programming subteam; built autonomous control and perception systems in Java. Set up control and vision test benches with NI LabVIEW and real-time object-tracking pipelines. Los Angeles Regional Winner (2023), Archimedes Division at World Championships (Top 24), Beach Blitz Winner (2022).</p>
+        <p class="project-panel-subtitle">Captain & Programming Lead · 100+ person team</p>
+        <div class="project-panel-description">
+          <ul>
+            <li>Led the Programming subteam; built autonomous control and perception systems in Java.</li>
+            <li>Set up control and vision test benches with NI LabVIEW and real-time object-tracking pipelines.</li>
+            <li>Los Angeles Regional Winner (2023), Archimedes Division at World Championships (Top 24), Beach Blitz Winner (2022).</li>
+          </ul>
+        </div>
       </div>
     </article>
     <article class="project-panel" id="project-3">
@@ -603,8 +439,16 @@
         <img src="images/project3-big.png" alt="Drowning Detection Assistant">
       </div>
       <div class="project-panel-content">
-        <h2 class="project-panel-title">Lemelson-MIT InvenTeam — Drowning Detection Assistant</h2>
-        <p class="project-panel-description">Project Lead for a team of 15. Integrated ultra-wideband, LiDAR, infrared, and Bluetooth sensors; developed custom housing for Bluetooth receivers to improve signal accuracy and obstacle detection. Connects with a drowning detection device to report signs of distress. Secured $7,500 from MIT and presented at EurekaFest.</p>
+        <h2 class="project-panel-title">Drowning Detection Assistant</h2>
+        <p class="project-panel-subtitle">Lemelson-MIT InvenTeam · Drowning detection device</p>
+        <div class="project-panel-description">
+          <ul>
+            <li>Project Lead for a team of 15.</li>
+            <li>Integrated ultra-wideband, LiDAR, infrared, and Bluetooth sensors; developed custom housing for Bluetooth receivers to improve signal accuracy and obstacle detection.</li>
+            <li>Connects with a drowning detection device to report signs of distress.</li>
+            <li>Secured $7,500 from MIT and presented at EurekaFest.</li>
+          </ul>
+        </div>
       </div>
     </article>
     <article class="project-panel" id="project-4">
@@ -613,7 +457,13 @@
       </div>
       <div class="project-panel-content">
         <h2 class="project-panel-title">VEX AI Robotics Competition</h2>
-        <p class="project-panel-description">Programming Lead. Developed an autonomous perception system using cameras and infrared with PyTorch on an NVIDIA Jetson. Competed in the fully autonomous robotics track—Top 6 at the World Championships and Think Award Winner (2021).</p>
+        <p class="project-panel-subtitle">Programming Lead · Autonomous robotics, PyTorch & Jetson</p>
+        <div class="project-panel-description">
+          <ul>
+            <li>Developed an autonomous perception system using cameras and infrared with PyTorch on an NVIDIA Jetson.</li>
+            <li>Competed in the fully autonomous robotics track—Top 6 at the World Championships and Think Award Winner (2021).</li>
+          </ul>
+        </div>
       </div>
     </article>
     <article class="project-panel" id="project-5">
@@ -622,19 +472,19 @@
       </div>
       <div class="project-panel-content">
         <h2 class="project-panel-title">Electronic Face Mask</h2>
-        <p class="project-panel-description">A wearable electronics project featuring an interactive electronic face mask. Combines custom hardware, embedded systems, and display elements for a hands-on exploration of wearable tech and user interface design.</p>
-      </div>
-    </article>
-    <article class="project-panel" id="project-6">
-      <div class="project-panel-image">
-        <img src="images/project6-small.png" alt="Bipedal Robot">
-      </div>
-      <div class="project-panel-content">
-        <h2 class="project-panel-title">Bipedal Robot</h2>
-        <p class="project-panel-description">Research in the Advanced Mechanical Bipedal Robotics Lab at Caltech. Working on control systems for humanoid robots as part of academic research in bipedal locomotion, balance, and dynamic walking.</p>
+        <p class="project-panel-subtitle">Wearable electronics · Interactive display</p>
+        <div class="project-panel-description">
+          <ul>
+            <li>Interactive electronic face mask combining custom hardware, embedded systems, and display elements.</li>
+            <li>Hands-on exploration of wearable tech and user interface design.</li>
+          </ul>
+        </div>
       </div>
     </article>
   </section>
+
+    </main>
+  </div>
 
   <script>
     (function() {

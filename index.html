@@ -229,12 +229,34 @@
       height: 100%;
     }
 
-    .mini-thumb {
+    .mini-thumb-wrap {
       width: 100%;
       aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-bottom: 6px solid var(--accent);
+    }
+
+    .mini-thumb {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
-      border-bottom: 6px solid var(--accent);
+      transition: transform 0.325s var(--ease);
+      transform: scale(1);
+    }
+
+    .mini-card:hover .mini-thumb {
+      transform: scale(1.06);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mini-thumb {
+        transition: none;
+      }
+
+      .mini-card:hover .mini-thumb {
+        transform: none;
+      }
     }
 
     .mini-meta {
@@ -522,6 +544,279 @@
       text-decoration: none;
     }
 
+    .detail-sheet {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(0.75rem, 3vw, 1.5rem);
+      pointer-events: none;
+      visibility: hidden;
+      transition: visibility 0.35s;
+    }
+
+    .detail-sheet.is-open {
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .detail-sheet-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.42);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .detail-sheet.is-open .detail-sheet-backdrop {
+      opacity: 1;
+    }
+
+    .detail-sheet-panel {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      width: min(100%, 1024px);
+      height: calc(50vh + 100px);
+      max-height: calc(50vh + 100px);
+      overflow: auto;
+      background: #F0F4F5;
+      border-radius: 0;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.16);
+      transform: translateY(100vh);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .detail-sheet.is-open .detail-sheet-panel {
+      transform: translateY(0);
+    }
+
+    .detail-sheet-close {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      z-index: 2;
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #5a6568;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+
+    .detail-sheet-close:hover {
+      color: #1a1f21;
+    }
+
+    .detail-sheet-close svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .detail-sheet-body {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      flex: 1;
+      gap: 64px;
+      min-height: 0;
+      padding: 48px;
+      box-sizing: border-box;
+    }
+
+    .detail-gallery-column {
+      flex-shrink: 0;
+      margin: 0;
+      width: min(calc(50vh + 100px - 96px), 100%);
+      max-width: 100%;
+    }
+
+    .detail-sheet-gallery {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: #dde4e6;
+    }
+
+    .detail-gallery-nav {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.35rem;
+      pointer-events: none;
+    }
+
+    .detail-gallery-prev,
+    .detail-gallery-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.35rem;
+      height: 2.35rem;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+    }
+
+    .detail-gallery-prev:hover,
+    .detail-gallery-next:hover {
+      opacity: 0.85;
+    }
+
+    .detail-gallery-prev svg,
+    .detail-gallery-next svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    .detail-gallery-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.55s ease;
+      pointer-events: none;
+    }
+
+    .detail-gallery-slide.is-active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .detail-sheet-copy {
+      flex: 1;
+      min-width: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-self: stretch;
+    }
+
+    .detail-tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      margin-top: auto;
+      padding-top: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .detail-tech-label {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: #1a1f21;
+    }
+
+    .detail-tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .detail-tech-tags li {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1f21;
+      padding: 0.4rem 0.7rem;
+      border: 1px solid #c5d0d3;
+      border-radius: 0;
+      background: #F0F4F5;
+    }
+
+    .detail-sheet-copy .mini-meta {
+      margin-top: 0;
+    }
+
+    .detail-sheet-copy .mini-title {
+      margin-top: 25px;
+    }
+
+    .detail-sheet-bullets {
+      margin: 12px 0 0;
+      padding: 0 0 0 1.15rem;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: #4a5558;
+      flex: 0 1 auto;
+      align-self: stretch;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .detail-sheet-bullets li {
+      margin: 0.4rem 0 0;
+    }
+
+    .detail-sheet-bullets li:first-child {
+      margin-top: 0;
+    }
+
+    @media (max-width: 640px) {
+      .detail-sheet-body {
+        flex-direction: column;
+        padding: 48px;
+      }
+
+      .detail-gallery-column {
+        width: min(calc(50vh + 100px - 96px), 100%);
+        max-width: 100%;
+      }
+
+      .detail-sheet-copy {
+        padding: 0;
+      }
+
+      .detail-tech-row {
+        margin-top: 1.25rem;
+      }
+    }
+
+    body.detail-sheet-open {
+      overflow: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .detail-sheet-backdrop,
+      .detail-sheet-panel {
+        transition-duration: 0.01ms;
+      }
+
+      .detail-gallery-slide {
+        transition: none;
+      }
+    }
+
     @media (max-width: 760px) {
       .card-grid-3,
       .news-grid {
@@ -561,7 +856,7 @@
         Computer Science + Robotics @ Caltech<br><br>
         Software Engineering Intern @ Apple
         <div class="top-links">
-          <a class="resume-btn" href="documents/Samantha%20Chang%20-%20Resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a class="resume-btn" href="documents/Resume.pdf" target="_blank" rel="noopener">Resume</a>
           <a class="icon-btn" href="https://www.linkedin.com/in/samantha-chang8/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
@@ -576,20 +871,26 @@
     </section>
 
     <section class="card-grid-3" aria-label="Featured cards">
-      <a class="mini-card" href="#project-1">
+      <a class="mini-card" href="#project-1" data-project="ball-humanoid">
+        <div class="mini-thumb-wrap">
         <img class="mini-thumb" src="images/project6-big.png" alt="">
+        </div>
         <p class="mini-meta"><span class="mini-meta-label">Researcher</span> <span class="mini-meta-entity">Caltech Autonomous Bipedal Robotics Lab</span></p>
         <p class="mini-title"><span>Ball Catching Humanoid Robot</span></p>
         <span class="mini-rule" aria-hidden="true"></span>
       </a>
-      <a class="mini-card" href="#project-2">
+      <a class="mini-card" href="#project-2" data-project="walker-inventeam">
+        <div class="mini-thumb-wrap">
         <img class="mini-thumb" src="images/project1-small.png" alt="">
+        </div>
         <p class="mini-meta"><span class="mini-meta-label">Project Lead</span> <span class="mini-meta-entity">MIT InvenTeam | $7,500 Grant</span></p>
         <p class="mini-title"><span>Autonomously Navigating Walker for Elderly Adults</span></p>
         <span class="mini-rule" aria-hidden="true"></span>
       </a>
-      <a class="mini-card" href="#project-3">
+      <a class="mini-card" href="#project-3" data-project="first-robot">
+        <div class="mini-thumb-wrap">
         <img class="mini-thumb" src="images/project2-small.png" alt="">
+        </div>
         <p class="mini-meta"><span class="mini-meta-label">Team Captain</span> <span class="mini-meta-entity">FIRST Robotics Top 24 Team</span></p>
         <p class="mini-title"><span>FIRST Robotics Competition Cone-Stacking Robot</span></p>
         <span class="mini-rule" aria-hidden="true"></span>
@@ -597,26 +898,78 @@
     </section>
 
     <section class="card-grid-3" aria-label="Featured cards row two">
-      <a class="mini-card" href="#project-1">
+      <a class="mini-card" href="#project-1" data-project="drowning-wristband">
+        <div class="mini-thumb-wrap">
         <img class="mini-thumb" src="images/project3-big.png" alt="">
+        </div>
         <p class="mini-meta"><span class="mini-meta-label">Programming Lead</span> <span class="mini-meta-entity">MIT InvenTeam | $10,000 Grant</span></p>
         <p class="mini-title"><span>Drowning Detection Wristband</span></p>
         <span class="mini-rule" aria-hidden="true"></span>
       </a>
-      <a class="mini-card" href="#project-2">
+      <a class="mini-card" href="#project-2" data-project="vex-ai">
+        <div class="mini-thumb-wrap">
         <img class="mini-thumb" src="images/project4-small.png" alt="">
+        </div>
         <p class="mini-meta"><span class="mini-meta-label">Programming Lead</span> <span class="mini-meta-entity">VEX AI Robotics Competition</span></p>
         <p class="mini-title"><span>Autonomous Competition Ball-Shooting Robot</span></p>
         <span class="mini-rule" aria-hidden="true"></span>
       </a>
-      <a class="mini-card" href="#project-3">
+      <a class="mini-card" href="#project-3" data-project="xprize-mask">
+        <div class="mini-thumb-wrap">
         <img class="mini-thumb" src="images/project5-small.png" alt="">
+        </div>
         <p class="mini-meta"><span class="mini-meta-label">Programming Lead</span> <span class="mini-meta-entity">XPRIZE Mask Challenge</span></p>
         <p class="mini-title"><span>Temperature and Humidity Controlled Face Mask</span></p>
         <span class="mini-rule" aria-hidden="true"></span>
       </a>
     </section>
 
+  </div>
+
+  <div id="detail-sheet" class="detail-sheet" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="detail-sheet-title">
+    <div class="detail-sheet-backdrop" id="detail-sheet-backdrop"></div>
+    <div class="detail-sheet-panel" id="detail-sheet-panel">
+      <button type="button" class="detail-sheet-close" id="detail-sheet-close" aria-label="Close detail panel">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="detail-sheet-body">
+        <div class="detail-gallery-column">
+          <div class="detail-sheet-gallery" id="detail-sheet-gallery" aria-hidden="true">
+            <img class="detail-gallery-slide is-active" src="images/project1-small.png" alt="">
+            <img class="detail-gallery-slide" src="images/project2-small.png" alt="">
+            <img class="detail-gallery-slide" src="images/project3-small.png" alt="">
+            <div class="detail-gallery-nav">
+              <button type="button" class="detail-gallery-prev" id="detail-gallery-prev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button type="button" class="detail-gallery-next" id="detail-gallery-next" aria-label="Next image">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="detail-sheet-copy">
+          <p class="mini-meta" id="detail-sheet-meta">
+            <span class="mini-meta-label" id="detail-caption-label">Caption</span>
+            <span class="mini-meta-entity" id="detail-caption-entity">Organization</span>
+          </p>
+          <p class="mini-title">
+            <span id="detail-sheet-title">Project</span>
+          </p>
+          <ul class="detail-sheet-bullets" id="detail-sheet-bullets"></ul>
+          <div class="detail-tech-row">
+            <span class="detail-tech-label">Technologies:</span>
+            <ul class="detail-tech-tags" id="detail-tech-tags"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -640,6 +993,162 @@
       }
 
       typeNext();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var sheet = document.getElementById('detail-sheet');
+      var backdrop = document.getElementById('detail-sheet-backdrop');
+      var closeBtn = document.getElementById('detail-sheet-close');
+      var titleEl = document.getElementById('detail-sheet-title');
+      var labelEl = document.getElementById('detail-caption-label');
+      var entityEl = document.getElementById('detail-caption-entity');
+      var bulletsEl = document.getElementById('detail-sheet-bullets');
+      var techTagsEl = document.getElementById('detail-tech-tags');
+      var gallerySlides = document.querySelectorAll('#detail-sheet-gallery .detail-gallery-slide');
+      var galleryPrev = document.getElementById('detail-gallery-prev');
+      var galleryNext = document.getElementById('detail-gallery-next');
+      var galleryIndex = 0;
+      if (!sheet || !titleEl || !bulletsEl || !techTagsEl || !labelEl || !entityEl) return;
+
+      var DETAIL_BULLETS = {
+        'ball-humanoid': [
+          'Research on improving ball-catching capabilities on a Unitree G1 humanoid robot.',
+          'Vision and motion sensing with SAM2 and OpenCV.'
+        ],
+        'walker-inventeam': [
+          'Led a team of 15 students; owned technical documentation and team communication.',
+          'Integrated ultra-wideband, LiDAR, infrared, and Bluetooth sensors with an A* navigation algorithm (C++).',
+          'Optimized signal accuracy and obstacle detection with custom housing for Bluetooth receivers.',
+          'Assembled electrical systems, supported CAD, and manufactured parts in-house; secured $7,500 MIT funding and presented at EurekaFest.'
+        ],
+        'first-robot': [
+          'Led a 100+ person team, including technical documentation and team communication (2023).',
+          'Programmed autonomous control and perception in Java; led the Programming subteam (2022).',
+          'Built LabVIEW and vision test benches for real-time object tracking and student mentoring.',
+          'Won Beach Blitz (2022), Los Angeles Regional (2023), and Top 24 at World Championships (2023).'
+        ],
+        'drowning-wristband': [
+          'Led MIT InvenTeam development for a wearable prototype with $10,000 grant funding.',
+          'Integrated embedded sensing and software for real-time water-safety monitoring.',
+          'Iterated hardware and software through testing, documentation, and team reviews.'
+        ],
+        'vex-ai': [
+          'Developed an autonomous perception system with cameras and infrared using PyTorch on an NVIDIA Jetson.',
+          'Finished Top 6 worldwide at the fully autonomous VEX AI World Championship.',
+          'Think Award winner (2021).'
+        ],
+        'xprize-mask': [
+          'Prototype for the XPRIZE Mask Challenge with temperature and humidity sensing and embedded control.',
+          'Focused on wearable comfort, environmental sensing, and iterative hardware–software integration.',
+          'Documented design decisions and testing for competition deliverables.'
+        ]
+      };
+
+      var DETAIL_TECHNOLOGIES = {
+        'ball-humanoid': ['SAM2', 'OpenCV', 'ROS'],
+        'walker-inventeam': ['C++', 'LiDAR', 'A*'],
+        'first-robot': ['Java', 'LabVIEW', 'OpenCV'],
+        'drowning-wristband': ['C++', 'BLE', 'CAD'],
+        'vex-ai': ['PyTorch', 'NVIDIA Jetson', 'Python'],
+        'xprize-mask': ['Python', 'CAD', 'C++']
+      };
+
+      function setTechTags(projectKey) {
+        techTagsEl.innerHTML = '';
+        var tags = DETAIL_TECHNOLOGIES[projectKey];
+        if (!tags || !tags.length) return;
+        for (var t = 0; t < tags.length; t += 1) {
+          var li = document.createElement('li');
+          li.textContent = tags[t];
+          techTagsEl.appendChild(li);
+        }
+      }
+
+      function setBullets(projectKey) {
+        bulletsEl.innerHTML = '';
+        var items = DETAIL_BULLETS[projectKey];
+        if (!items || !items.length) {
+          var li = document.createElement('li');
+          li.textContent = 'Details coming soon.';
+          bulletsEl.appendChild(li);
+          return;
+        }
+        for (var b = 0; b < items.length; b += 1) {
+          var item = document.createElement('li');
+          item.textContent = items[b];
+          bulletsEl.appendChild(item);
+        }
+      }
+
+      function setGallerySlide(i) {
+        galleryIndex = i;
+        for (var s = 0; s < gallerySlides.length; s += 1) {
+          gallerySlides[s].classList.toggle('is-active', s === galleryIndex);
+        }
+      }
+
+      function stepGallery(delta) {
+        var n = gallerySlides.length;
+        if (n === 0) return;
+        setGallerySlide((galleryIndex + delta + n) % n);
+      }
+
+      function openDetail(card) {
+        var titleSpan = card.querySelector('.mini-title span');
+        var labelSpan = card.querySelector('.mini-meta-label');
+        var entitySpan = card.querySelector('.mini-meta-entity');
+        var projectKey = card.getAttribute('data-project') || '';
+        titleEl.textContent = titleSpan ? titleSpan.textContent.trim() : 'Project';
+        labelEl.textContent = labelSpan ? labelSpan.textContent.trim() : '';
+        entityEl.textContent = entitySpan ? entitySpan.textContent.trim() : '';
+        setBullets(projectKey);
+        setTechTags(projectKey);
+        sheet.classList.add('is-open');
+        sheet.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('detail-sheet-open');
+        setGallerySlide(0);
+      }
+
+      function closeDetail() {
+        sheet.classList.remove('is-open');
+        sheet.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('detail-sheet-open');
+      }
+
+      document.querySelectorAll('.mini-card').forEach(function (card) {
+        card.addEventListener('click', function (e) {
+          e.preventDefault();
+          openDetail(card);
+        });
+      });
+
+      if (backdrop) {
+        backdrop.addEventListener('click', closeDetail);
+      }
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeDetail);
+      }
+
+      if (galleryPrev) {
+        galleryPrev.addEventListener('click', function (e) {
+          e.stopPropagation();
+          stepGallery(-1);
+        });
+      }
+      if (galleryNext) {
+        galleryNext.addEventListener('click', function (e) {
+          e.stopPropagation();
+          stepGallery(1);
+        });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sheet.classList.contains('is-open')) {
+          closeDetail();
+        }
+      });
     })();
   </script>
 

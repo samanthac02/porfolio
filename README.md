@@ -1,1 +1,1 @@
-# https://samanthac02.github.io/porfolio/
+# https://samanthac02.github.io/portfolio/
